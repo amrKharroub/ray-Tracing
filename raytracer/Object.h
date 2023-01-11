@@ -103,11 +103,13 @@ private:
 public:
 	Plane(void) = default;
 
-	Plane(Vector pa, Vector pb, Vector pc, Vector pd, Color col, float shin)
+	Plane(Vector pa, Vector pb, Vector pc, Vector pd, Color col, float shin, float tran)
 		: a(pa), b(pb), c(pc), d(pd)
 	{
 		color = col;
 		shininess = shin;
+		translucency = tran;
+		
 	};
 
 
@@ -260,8 +262,6 @@ float Plane::intersect(Vector pos, Vector dir)
 // Function to compute the unit normal vector
 Vector Plane::normal(Vector pos)
 {
-
-	//Implement this function.
 	return (b - a).cross((c - a));
 }
 
@@ -313,11 +313,12 @@ float Cone::intersect(Vector pos, Vector dir)
 * Returns the unit normal vector at a given point.
 * Assumption: The input point p lies on the Cone.
 */
-Vector Cone::normal(Vector p)
-{
-	float theta = atan(radius / height);
-	float alpha = atan((p.x - center.x) / (p.x - center.x));
-	Vector n = Vector(sin(alpha) * cos(theta), sin(theta), cos(alpha) * cos(theta));
+Vector Cone::normal(Vector p) {
+	float x = p.x - center.x;
+	float z = p.z - center.z;
+	float d = sqrt(pow(x, 2) + pow(z, 2));
+	Vector n = Vector(x, -(radius / height) * d, z);
+	n.normalise();
 	return n;
 }
 

@@ -16,7 +16,7 @@ using namespace std;
 const float WIDTH = 26.0;
 const float HEIGHT = 20.0;
 const float EDIST = 20.0;
-const int PPU = 60;     //Total 600x600 pixels
+const int PPU = 60;   
 const int MAX_STEPS = 6;
 const float XMIN = -WIDTH * 0.5;
 const float XMAX = WIDTH * 0.5;
@@ -142,7 +142,7 @@ void display() {
 	float pixelSize = 1.0 / PPU;
 	float halfPixelSize = pixelSize / 2.0;
 	float x1, y1, xc, yc;
-	Vector eye(0., 0., 5.0f);
+	Vector eye(0., 1., 5.0f);
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -171,12 +171,27 @@ void display() {
 	glFlush();
 }
 
+void cubiod()
+{
+	Plane* front = new Plane(Vector(-25, -10, -40), Vector(-17, -10, -40), Vector(-17., -3, -40), Vector(-25, -3, -40), Color::YELLOW, 0.5f, 0.0f);
+	Plane* down = new Plane(Vector(-25, -10, -40), Vector(-17, -10, -40), Vector(-17., -10, -48), Vector(-25, -10, -48), Color::YELLOW, 0.5f, 0.0f);
+	Plane* right = new Plane(Vector(-17, -10, -40), Vector(-17., -10, -48), Vector(-17., -3, -48), Vector(-17., -3, -40), Color::YELLOW, 0.5f, 0.0f);
+	Plane* up = new Plane(Vector(-17., -3, -40), Vector(-25, -3, -40), Vector(-25., -3, -48), Vector(-17, -3, -48), Color::YELLOW, 0.5f, 0.0f);
+	Plane* left = new Plane(Vector(-25, -10, -40), Vector(-25, -10, -48), Vector(-25, -3, -48), Vector(-25, -3, -40), Color::YELLOW, 0.5f, 0.0f);
+	Plane* back = new Plane(Vector(-25, -10, -48), Vector(-17., -10, -48), Vector(-17., -3, -48), Vector(-25, -3, -40), Color::YELLOW, 0.5f, 0.0f);
+	sceneObjects.push_back(front);
+	sceneObjects.push_back(down);
+	sceneObjects.push_back(right);
+	sceneObjects.push_back(up);
+	sceneObjects.push_back(left);
+	sceneObjects.push_back(back);
+}
 
 void initialize()
 {
 	//Iniitialize background colour and light's position
 	backgroundCol = Color::GRAY;
-	light.l = Vector(2.0f, 10.0f, 5.0f);
+	light.l = Vector(10.0f, 10.0f, 5.0f);
 
 	Sphere* sphere1 = new Sphere(Vector(10, -1.0f, -60), 5.0, Color::CYAN, 0.5f, 0.5f);
 	sceneObjects.push_back(sphere1);
@@ -189,7 +204,7 @@ void initialize()
 
 
 	Plane* plane = new Plane(Vector(-1000, -12, 5000), Vector(1000, -12, 5000),
-		Vector(1000., -12, -5000), Vector(-1000., -12, -5000), Color::WHITE, 1.0f);
+		Vector(1000., -12, -5000), Vector(-1000., -12, -5000), Color::WHITE, 1.0f, 0.0f);
 	sceneObjects.push_back(plane);
 
 	Cylinder* cylinder = new Cylinder(Vector(0, -10, -30), 3.0f, 8.0f, Color::MAGENTA, 0.5f, 0.8f);
@@ -198,7 +213,8 @@ void initialize()
 	Cone* cone = new Cone(Vector(16, -10, -40), 3.0f, 10.0f, Color::RED, 0.5f, 0.0f);
 	sceneObjects.push_back(cone);
 
-
+	cubiod();
+	
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(XMIN, XMAX, YMIN, YMAX);
 	glMatrixMode(GL_MODELVIEW);
