@@ -15,7 +15,7 @@ using namespace std;
 
 const float WIDTH = 26.0;
 const float HEIGHT = 20.0;
-const float EDIST = 20.0;
+const float DEPTH = 20.0;
 const int PPU = 60;   
 const int MAX_STEPS = 6;
 const float XMIN = -WIDTH * 0.5;
@@ -142,7 +142,7 @@ void display() {
 	float pixelSize = 1.0 / PPU;
 	float halfPixelSize = pixelSize / 2.0;
 	float x1, y1, xc, yc;
-	Vector eye(0., 1., 5.0f);
+	Vector eye(0., 0., 5.0f);
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -157,7 +157,7 @@ void display() {
 			x1 = XMIN + j * pixelSize;
 			xc = x1 + halfPixelSize;
 
-			Vector dir(xc, yc, -EDIST);	//direction of the primary ray
+			Vector dir(xc, yc, -DEPTH);	//direction of the primary ray
 
 			dir.normalise();			//Normalise this direction
 
@@ -173,12 +173,12 @@ void display() {
 
 void cubiod()
 {
-	Plane* front = new Plane(Vector(-25, -10, -40), Vector(-17, -10, -40), Vector(-17., -3, -40), Vector(-25, -3, -40), Color::YELLOW, 0.5f, 0.0f);
-	Plane* down = new Plane(Vector(-25, -10, -40), Vector(-17, -10, -40), Vector(-17., -10, -48), Vector(-25, -10, -48), Color::YELLOW, 0.5f, 0.0f);
-	Plane* right = new Plane(Vector(-17, -10, -40), Vector(-17., -10, -48), Vector(-17., -3, -48), Vector(-17., -3, -40), Color::YELLOW, 0.5f, 0.0f);
-	Plane* up = new Plane(Vector(-17., -3, -40), Vector(-25, -3, -40), Vector(-25., -3, -48), Vector(-17, -3, -48), Color::YELLOW, 0.5f, 0.0f);
-	Plane* left = new Plane(Vector(-25, -10, -40), Vector(-25, -10, -48), Vector(-25, -3, -48), Vector(-25, -3, -40), Color::YELLOW, 0.5f, 0.0f);
-	Plane* back = new Plane(Vector(-25, -10, -48), Vector(-17., -10, -48), Vector(-17., -3, -48), Vector(-25, -3, -40), Color::YELLOW, 0.5f, 0.0f);
+	Plane* front = new Plane(Vector(-25, -7, -40), Vector(-17, -7, -40), Vector(-17., 0, -40), Vector(-25, 0, -40), Color::YELLOW, 0.5f, 0.0f);
+	Plane* down = new Plane(Vector(-25, -7, -40), Vector(-17, -7, -40), Vector(-17., -7, -48), Vector(-25, -7, -48), Color::YELLOW, 0.5f, 0.0f);
+	Plane* right = new Plane(Vector(-17, -7, -40), Vector(-17., -7, -48), Vector(-17., 0, -48), Vector(-17., 0, -40), Color::YELLOW, 0.5f, 0.0f);
+	Plane* up = new Plane(Vector(-17., 0, -40), Vector(-25, 0, -40), Vector(-25., 0, -48), Vector(-17, 0, -48), Color::YELLOW, 0.5f, 0.0f);
+	Plane* left = new Plane(Vector(-25, -7, -40), Vector(-25, -7, -48), Vector(-25, 0, -48), Vector(-25, 0, -40), Color::YELLOW, 0.5f, 0.0f);
+	Plane* back = new Plane(Vector(-25, -7, -48), Vector(-17., -7, -48), Vector(-17., 0, -48), Vector(-25, 0, -40), Color::YELLOW, 0.5f, 0.0f);
 	sceneObjects.push_back(front);
 	sceneObjects.push_back(down);
 	sceneObjects.push_back(right);
@@ -193,13 +193,13 @@ void initialize()
 	backgroundCol = Color::GRAY;
 	light.l = Vector(10.0f, 10.0f, 5.0f);
 
-	Sphere* sphere1 = new Sphere(Vector(10, -1.0f, -60), 5.0, Color::CYAN, 0.5f, 0.5f);
+	Sphere* sphere1 = new Sphere(Vector(10, 0.0f, -40), 4.5, Color::CYAN, 0.0f, 0.5f);
 	sceneObjects.push_back(sphere1);
 
 	Sphere* sphere2 = new Sphere(Vector(-6, 12, -50.0f), 10.0, Color::MAGENTA, 0.5f, 0.4f);
 	sceneObjects.push_back(sphere2);
 
-	Sphere* sphere4 = new Sphere(Vector(-12, -5, -40.0f), 4.5, Color::WHITE, 0.5f, 0.3f);
+	Sphere* sphere4 = new Sphere(Vector(-10, -5, -40.0f), 4.5, Color::WHITE, 0.5f, 0.3f);
 	sceneObjects.push_back(sphere4);
 
 
@@ -210,7 +210,7 @@ void initialize()
 	Cylinder* cylinder = new Cylinder(Vector(0, -10, -30), 3.0f, 8.0f, Color::MAGENTA, 0.5f, 0.8f);
 	sceneObjects.push_back(cylinder);
 
-	Cone* cone = new Cone(Vector(16, -10, -40), 3.0f, 10.0f, Color::RED, 0.5f, 0.0f);
+	Cone* cone = new Cone(Vector(15, -10.0f, -30), 3.0f, 10.0f, Color::RED, 0.5f, 0.0f);
 	sceneObjects.push_back(cone);
 
 	cubiod();

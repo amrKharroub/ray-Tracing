@@ -1,0 +1,13 @@
+﻿  main.cpp
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\Object.h(274,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\Object.h(283,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\Object.h(288,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\Object.h(319,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\Object.h(328,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\Object.h(330,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\Object.h(331,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\main.cpp(56,20): warning C4018: '<': signed/unsigned mismatch
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\main.cpp(128,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\main.cpp(142,29): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\main.cpp(143,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  RayTracer.vcxproj -> C:\AUST stuff\Game Design and development\ray-Tracing\raytracer\Debug\RayTracer.exe
