@@ -17,7 +17,7 @@ const float WIDTH = 26.0;
 const float HEIGHT = 20.0;
 const float DEPTH = 20.0;
 const int PPU = 60;   
-const int MAX_STEPS = 6;
+const int MAX_STEPS = 2;
 const float XMIN = -WIDTH * 0.5;
 const float XMAX = WIDTH * 0.5;
 const float YMIN = -HEIGHT * 0.5;
@@ -49,7 +49,7 @@ struct PointBundle
 PointBundle closestPt(Vector pos, Vector dir)
 {
 	Vector  point(0, 0, 0);
-	float min = 10000.0;
+	float min = FLT_MAX;
 
 	PointBundle out = { point, -1, 0.0 };
 
@@ -115,7 +115,7 @@ Color trace(Vector pos, Vector dir, int step)
 	if (shininess != 0.0f)
 	{
 		Vector rdir = dir - n * (2 * dir.dot(n));
-		Color rColor = trace(pos, rdir, step++);
+		Color rColor = trace(q.point, rdir, step+1);
 		rColor.scaleColor(shininess);
 		colorSum = colorSum + rColor;
 	}
@@ -128,7 +128,7 @@ Color trace(Vector pos, Vector dir, int step)
 		float cosTheta = 1 - pow(n1overn2, 2) * (1 - pow(dir.dot(n), 2));
 		Vector ndir = Vector(-dir.x, -dir.y, -dir.z);
 		Vector refracted = (n1overn2 * ndir.dot(n) - sqrtf(cosTheta)) * n - n1overn2 * ndir;
-		Color rColor = trace(pos, refracted, step++);
+		Color rColor = trace(q.point, refracted, step+1);
 		rColor.scaleColor(translucency);
 		colorSum = colorSum + rColor;
 	}
@@ -210,7 +210,7 @@ void initialize()
 	Cylinder* cylinder = new Cylinder(Vector(0, -10, -30), 3.0f, 8.0f, Color::MAGENTA, 0.5f, 0.8f);
 	sceneObjects.push_back(cylinder);
 
-	Cone* cone = new Cone(Vector(15, -10.0f, -30), 3.0f, 10.0f, Color::RED, 0.5f, 0.0f);
+	Cone* cone = new Cone(Vector(15, -10.0f, -30), 3.0f, 5.0f, Color::RED, 0.5f, 0.0f);
 	sceneObjects.push_back(cone);
 
 	cubiod();
